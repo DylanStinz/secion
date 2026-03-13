@@ -5,45 +5,71 @@ def main(page: ft.Page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     emailV = "elpepe@gmail.com"
     contraV = "admin123"
+    
+    def mostrar_app():
+        page.clean()
+
+        page.add(
+            ft.Text("Bienvenido", size=30, weight=ft.FontWeight.BOLD)
+        )
+
+        page.navigation_bar = ft.NavigationBar(
+            destinations=[
+                ft.NavigationBarDestination(
+                    icon=ft.Icons.HOME,
+                    label="Inicio",
+                ),
+                ft.NavigationBarDestination(
+                    icon=ft.Icons.PERSON,
+                    label="Perfil",
+                ),
+                ft.NavigationBarDestination(
+                    icon=ft.Icons.SETTINGS,
+                    label="Configuración",
+                ),
+            ]
+        )
+
+        page.update()
+
     def login_click(e):
         if email.value == emailV and contra.value == contraV:
             page.show_dialog(ft.SnackBar(ft.Text("¡Inicio de sesión exitoso!")))
+            mostrar_app()
         else:
-           page.show_dialog(ft.SnackBar(ft.Text("¡Correo o contraseña incorrectos!")))
+            page.show_dialog(ft.SnackBar(ft.Text("¡Correo o contraseña incorrectos!")))
+
     titulo = ft.Text(
         value="Inicio de sesión",
         size=30,
         weight=ft.FontWeight.BOLD,
         color=ft.Colors.BLACK,
-        
     )
 
     email = ft.TextField(
-            label="Email",
-            hint_text="usuario@gmail.com", prefix_icon=ft.Icons.EMAIL,
-            autofocus=True
-            )
+        label="Email",
+        hint_text="usuario@gmail.com",
+        prefix_icon=ft.Icons.EMAIL,
+        autofocus=True
+    )
 
     contra = ft.TextField(
         label="Ingrese su contraseña",
         password=True,
         can_reveal_password=True,
-        prefix_icon=ft.Icons.PASSWORD,
-        autofocus=True
+        prefix_icon=ft.Icons.PASSWORD
     )
-    
+
     boton = ft.ElevatedButton(
-    "Iniciar sesión",
-    icon=ft.Icons.LOGIN,
-    on_click=login_click
+        "Iniciar sesión",
+        icon=ft.Icons.LOGIN,
+        on_click=login_click
     )
+
     boton2 = ft.ElevatedButton(
-    "¿Olvidaste tu contraseña?",
-    icon=ft.Icons.KEY
-    
+        "¿Olvidaste tu contraseña?",
+        icon=ft.Icons.KEY
     )
-    
-        
 
     page.add(
         titulo,
